@@ -1017,7 +1017,7 @@ tr:last-of-type {
     display: flex;
     flex-direction: column-reverse;
     flex-wrap: nowrap;
-    justify-content: space-between;
+    justify-content: baseline;
     align-items: baseline;
     width: 100%;
   }
@@ -1026,7 +1026,7 @@ tr:last-of-type {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    justify-content: baseline;
+    justify-content: center;
     align-items: baseline;
     width: 200px;
   }
@@ -1149,7 +1149,9 @@ tr:last-of-type {
 
   .points-section {
     width: 100vw;
-    height: 50rem;
+    /* height: 50rem; */
+    height: max-content;
+    margin-bottom: 4rem;
     /* background-color: red; */
   }
 
@@ -1159,7 +1161,9 @@ tr:last-of-type {
 
   .pts-table {
     font-size: 2rem;
-    height: 40rem;
+    /* height: 40rem; */
+    height: max-content;
+    max-height: 40rem;
     overflow-y: scroll;
     overflow-x: scroll;
     border-radius: 1rem;

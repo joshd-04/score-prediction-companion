@@ -132,6 +132,12 @@ function compareFn(a: IPrediction, b: IPrediction, game: IGame) {
 
 function PointsTable({ game }: { game: IGame }) {
   const predictions = game.predictions;
+  if (game.predictions.length === 0)
+    return (
+      <p style={{ fontStyle: 'italic', marginTop: '-3rem' }}>
+        No data to present
+      </p>
+    );
   return (
     <div className="pts-table">
       <table>
