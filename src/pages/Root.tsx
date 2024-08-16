@@ -1,7 +1,7 @@
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { HomeFillSVG, HomeSVG } from '../components/SVGs';
 import { useEffect, useState } from 'react';
-import { data as defaultData, IGame } from '../util/data';
+import { IGame } from '../util/data';
 
 export interface IContext {
   data: IGame[];
