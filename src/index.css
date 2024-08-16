@@ -619,14 +619,18 @@ tr:last-of-type {
     cursor: pointer;
   }
 
+  .home-icon {
+    position: fixed;
+    z-index: 99;
+  }
+
   .home-icon svg {
     position: fixed;
     left: 0;
     top: 0;
     margin: 2rem;
-    padding: 0.5rem;
+    padding: 1rem;
     width: max-content;
-    background-color: rgb(236, 0, 0);
     border-radius: 50%;
     z-index: 99;
   }
@@ -656,7 +660,7 @@ tr:last-of-type {
 
   .home .main {
     position: relative;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     background: var(--light-grey-linear);
     border-radius: 0;
@@ -684,7 +688,7 @@ tr:last-of-type {
     color: white;
     background: var(--green-linear);
     display: inline;
-    font-size: 3rem;
+    font-size: 2rem;
     border-radius: 10px;
     font-weight: 700;
   }
@@ -707,17 +711,18 @@ tr:last-of-type {
   }
 
   .home .game-preview {
-    width: 100%;
-    min-width: 400px;
-    height: 14rem;
+    width: calc(100vw - 2rem);
+    min-width: calc(100vw - 2rem);
+    max-width: calc(100vw - 2rem);
+    height: 12rem;
     background: var(--grey-linear);
     border-radius: 20px;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
-    padding: 4rem;
+    padding: 2rem 0rem;
     margin-bottom: 2rem;
   }
 
@@ -743,7 +748,7 @@ tr:last-of-type {
   }
 
   .home .game-preview .game-details h2 {
-    font-size: 3rem;
+    font-size: 2rem;
     margin: -1rem 0 0.5rem 0;
   }
 
@@ -754,7 +759,7 @@ tr:last-of-type {
   }
 
   .home .game-preview .game-details p {
-    font-size: 1.7rem;
+    font-size: 1.5rem;
   }
   .home .game-preview .game-details p:nth-child(1) {
     color: #5a5a5a;
@@ -782,29 +787,33 @@ tr:last-of-type {
     background-color: rgba(255, 0, 0, 0.3);
   }
 
+  .home .game-preview svg {
+    width: 40px;
+  }
+
   .home .about {
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     background: var(--blue-linear);
     border-radius: 0;
     box-shadow: 0px;
     color: white;
     padding: 0 8rem;
-    min-width: 420px;
+    min-width: 100vw;
   }
 
   .home .about h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
     margin: 4rem 0 8rem 0;
     text-align: center;
   }
   .home .about h2 {
-    font-size: 2.4rem;
+    font-size: 2rem;
     font-weight: 500;
     margin-bottom: 1rem;
   }
   .home .about p {
-    font-size: 2.4rem;
+    font-size: 2rem;
     font-weight: 400;
     padding-left: 2rem;
     margin-bottom: 2.5rem;
@@ -827,8 +836,8 @@ tr:last-of-type {
   .big-form {
     background-color: rgba(255, 255, 255, 0.1);
     width: 72vw;
-    height: 100%;
-    margin: 0 auto;
+    height: 90vh;
+    margin: auto auto;
     border-radius: 2rem;
     color: white;
     display: flex;
@@ -842,7 +851,7 @@ tr:last-of-type {
   }
 
   .big-form h1 {
-    font-size: 3rem;
+    font-size: 2rem;
     text-align: center;
     padding-top: 8rem;
     margin-bottom: 5.5rem;
@@ -851,7 +860,7 @@ tr:last-of-type {
   .big-form label span,
   .big-form label input,
   .big-form label select {
-    font-size: 2.4rem;
+    font-size: 1.8rem;
     font-weight: 700;
   }
 
@@ -865,14 +874,19 @@ tr:last-of-type {
   .big-form label select {
     outline: none;
     left: 28rem;
-    width: 30rem;
     height: 3.5rem;
     margin-left: 0rem;
+  }
+  .big-form label input {
+    width: 90%;
+  }
+  .big-form label select {
+    width: 100%;
   }
 
   .big-form label p {
     color: rgb(172, 20, 20);
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 450;
     margin-left: 20rem;
     margin-top: 1rem;
@@ -884,7 +898,7 @@ tr:last-of-type {
     width: 20rem;
     height: 40px;
     min-height: 40px;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     border-radius: 1rem;
     background-color: #e6e6e6;
   }
@@ -901,7 +915,7 @@ tr:last-of-type {
     justify-content: baseline;
     align-items: center;
     /* padding: 5rem 20rem 0 20rem; */
-    padding: 6rem 4rem 0 5rem;
+    padding: 7rem 4rem 0 2rem;
     background: var(--light-grey-linear);
     height: max-content;
     width: 100vw;
@@ -919,16 +933,16 @@ tr:last-of-type {
   }
 
   .game-page h1 {
-    font-size: 3.5rem;
+    font-size: 3rem;
   }
 
   .game-page h2 {
-    font-size: 2.8rem;
+    font-size: 2.5rem;
   }
 
   .game-page p,
   .game-page span {
-    font-size: 2rem;
+    font-size: 1.6rem;
     font-weight: 400;
   }
 
@@ -961,8 +975,8 @@ tr:last-of-type {
 
   .game-page .topbar button {
     background: var(--blue-linear);
-    font-size: 2.8rem;
-    padding: 2rem 4rem;
+    font-size: 2rem;
+    padding: 1.5rem 3rem;
     border-radius: 1rem;
     color: white;
     font-weight: 600;
@@ -1024,12 +1038,12 @@ tr:last-of-type {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 4rem;
-    width: 400px;
+    width: 300px;
   }
 
   .game-page .prediction-section .top > button {
     background: var(--green-linear);
-    font-size: 2.5rem;
+    font-size: 2rem;
     padding: 1.5rem 3rem;
     border-radius: 1rem;
     color: white;
@@ -1045,8 +1059,8 @@ tr:last-of-type {
   }
 
   .prediction-card {
-    width: 400px;
-    max-width: 400px;
+    width: calc(100vw - 4rem);
+    max-width: 100vw;
 
     background-color: #d9d9d9;
     height: 12rem;
@@ -1080,10 +1094,10 @@ tr:last-of-type {
   }
 
   .prediction-card .user h2 {
-    font-size: 1.8rem;
-    max-width: 10rem;
-    min-width: 10rem;
-    margin-left: 1rem;
+    font-size: 1.5rem;
+    max-width: 7rem;
+    min-width: 7rem;
+    margin-left: 0.3rem;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -1091,30 +1105,31 @@ tr:last-of-type {
   .prediction-card .user-stats p {
     margin-left: 0rem;
     background: var(--orange-linear);
-    padding: 0.5rem 2rem;
+    padding: 0.5rem 1rem;
     border-radius: 1rem;
     outline: solid black 1px;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
   }
 
   .prediction-card .predictions {
-    margin-left: 0rem;
+    margin-left: -4rem;
   }
 
   .prediction-card .predictions span {
     display: block;
+    text-wrap: nowrap;
   }
   .prediction-card .predictions p {
-    display: inline-block;
+    display: inline;
     vertical-align: middle;
     max-width: 12rem;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    font-size: 1.8rem;
+    font-size: 1.2rem;
   }
   .prediction-card .predictions svg {
-    display: inline-block;
+    display: inline;
     vertical-align: middle;
     margin-right: 0.7rem;
   }
@@ -1133,7 +1148,7 @@ tr:last-of-type {
   }
 
   .points-section {
-    width: 400px;
+    width: 100vw;
     height: 50rem;
     /* background-color: red; */
   }
@@ -1143,7 +1158,7 @@ tr:last-of-type {
   }
 
   .pts-table {
-    font-size: 2.5rem;
+    font-size: 2rem;
     height: 40rem;
     overflow-y: scroll;
     overflow-x: scroll;
