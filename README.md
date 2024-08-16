@@ -6,7 +6,13 @@ Made to assist calculating points from predictions given by members from an onli
 
 Original idea was to move the whole football prediction process onto its own website but that was too complex for me
 
-So i made this.
+So i made this: [Score Prediction Companion](https://prediction-companion.netlify.app/)
+
+## Points system
+
++2 pts for getting correct outcome <br>
++3 pts for getting correct score <br>
++3 pts for getting correct first goal scorer
 
 ## Technical
 
