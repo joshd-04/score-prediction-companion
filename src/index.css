@@ -919,6 +919,7 @@ tr:last-of-type {
     background: var(--light-grey-linear);
     height: max-content;
     width: 100vw;
+    overflow-x: hidden;
   }
 
   .game-page .topbar {
