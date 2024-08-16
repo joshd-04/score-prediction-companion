@@ -243,7 +243,8 @@ button {
 }
 .big-form {
   background-color: rgba(255, 255, 255, 0.1);
-  width: 36vw;
+  width: 70vw;
+  max-width: 650px;
   height: 100%;
   margin: 0 auto;
   border-radius: 2rem;
