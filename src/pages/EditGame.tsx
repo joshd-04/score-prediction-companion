@@ -108,6 +108,18 @@ export default function EditGame() {
     // this line prevents ts error, this line will never  get executed because we dealt with this earlier
     if (outcome === '') return;
 
+    // if we have a final score, and its not 0-0, we need a first goal scorer.
+    // if it is 0-0, fgs = null
+    // if no final score, fgs = undefined
+    let fgs: string | null | undefined;
+    if (finalScore.trim().length > 0 && finalScore.trim() !== '0-0') {
+      fgs = firstGoalScorer?.trim();
+    } else if (finalScore.trim() === '0-0') {
+      fgs = null;
+    } else {
+      fgs = undefined;
+    }
+
     const updatedGame: IGame = {
       discriminator: 'I-G-A-M-E-0101',
       id: game.id,
@@ -118,8 +130,7 @@ export default function EditGame() {
       formattedDate: formatShortDate(new Date(date)),
       multiplier: multiplier === '' ? 1 : +multiplier,
       finalScore: finalScore.length === 0 ? undefined : finalScore.trim(),
-      firstGoalScorer:
-        firstGoalScorer?.length === 0 ? undefined : firstGoalScorer?.trim(),
+      firstGoalScorer: fgs,
       predictions: game.predictions,
     };
 

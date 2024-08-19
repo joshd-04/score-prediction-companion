@@ -54,6 +54,19 @@ export default function PredictionCard({
     if (actual !== prediction) return <CrossSVG />;
   }
 
+  function checkScorePrediction(
+    actual: string | undefined,
+    prediction: string
+  ) {
+    if (actual === prediction) return <TickSVG />;
+
+    const individualScores = prediction.split('-').filter((str) => str !== '');
+
+    if (actual === individualScores.reverse().join('-')) return <TickSVG />;
+    if (actual === undefined) return <QuestionBoxSVG />;
+    if (actual !== prediction) return <CrossSVG />;
+  }
+
   return (
     <div className="prediction-card">
       <Tippy content="Click to edit prediction">
@@ -72,7 +85,7 @@ export default function PredictionCard({
             <p>{predWinner}</p>
           </span>
           <span>
-            {checkPrediction(game.finalScore, prediction.finalScore)}
+            {checkScorePrediction(game.finalScore, prediction.finalScore)}
             <p>Score: {prediction.finalScore}</p>
           </span>
           <span>

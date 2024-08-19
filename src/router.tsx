@@ -7,6 +7,7 @@ import NotFound from './pages/NotFound';
 import EditGame from './pages/EditGame';
 import AddPrediction from './pages/AddPrediction';
 import EditPrediction from './pages/EditPrediction';
+import { TallyPoints } from './pages/TallyPoints';
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />,
+      },
+      {
+        path: '/tally-points',
+        element: <TallyPoints />,
       },
       {
         path: '/add-game',

@@ -3,6 +3,8 @@ import Game from '../components/Game';
 // import { data } from '../util/data';
 import { IContext } from './Root';
 import usePageTitle from '../util/usePageTitle';
+import { AddSVG, AnalyticsSVG } from '../components/SVGs';
+import Tippy from '@tippyjs/react';
 
 export default function Home() {
   usePageTitle('Score Prediction Companion');
@@ -32,10 +34,23 @@ function TopBar() {
     navigator('/add-game');
   }
 
+  function handleTallyPoints() {
+    navigator('/tally-points');
+  }
+
   return (
     <div className="topbar">
+      <Tippy content="Tally points from multiple games">
+        <button onClick={handleTallyPoints}>
+          <AnalyticsSVG fillColor="#eee" />
+        </button>
+      </Tippy>
       <h1>Your games and predictions</h1>
-      <button onClick={handleAddGame}>+</button>
+      <Tippy content="Add game">
+        <button onClick={handleAddGame}>
+          <AddSVG fillColor="#eee" />
+        </button>
+      </Tippy>
     </div>
   );
 }

@@ -155,7 +155,16 @@ function PointsTable({ game }: { game: IGame }) {
               return (
                 <tr key={i}>
                   <td>{i + 1}</td>
-                  <td>{pred.username}</td>
+                  <td
+                    style={{
+                      maxWidth: '30rem',
+                      textOverflow: 'ellipsis',
+                      overflow: 'hidden',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {pred.username}
+                  </td>
                   <td>{calculatePoints(game, pred)}</td>
                 </tr>
               );

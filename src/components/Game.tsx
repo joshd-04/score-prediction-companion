@@ -18,7 +18,7 @@ export default function Game({
   }
 
   return (
-    <div className="game-preview ">
+    <div className="game-preview">
       <div>
         {game.finalScore ? (
           <Tippy content="You have given the match outcome">

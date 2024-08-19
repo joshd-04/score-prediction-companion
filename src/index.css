@@ -30,6 +30,24 @@ button {
   cursor: pointer;
   border: none;
   outline: none;
+  position: relative;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  position: relative;
+}
+
+button:disabled::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: inherit;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 9;
 }
 
 .hoverable {
@@ -45,7 +63,7 @@ button {
   width: max-content;
   background-color: white;
   border-radius: 50%;
-  z-index: 99;
+  z-index: 999;
 }
 
 .home-icon p {
@@ -58,7 +76,7 @@ button {
   top: 0;
   margin: 5rem 0 0 5rem;
   transform: translateY(-50%);
-  z-index: 98;
+  z-index: 998;
   padding: 1rem 1rem 1rem 4rem;
   border-radius: 2rem;
 }
@@ -112,7 +130,10 @@ button {
 }
 
 .home .topbar button {
-  padding: 2rem 3rem;
+  padding: 1.4rem 1.7rem;
+}
+.home .topbar svg {
+  vertical-align: middle;
 }
 
 .home .games-list {
@@ -123,7 +144,7 @@ button {
   margin-bottom: 2rem;
 }
 
-.home .game-preview {
+.game-preview {
   width: 100%;
   min-width: 400px;
   height: 14rem;
@@ -136,21 +157,26 @@ button {
   align-items: center;
   padding: 4rem;
   margin-bottom: 2rem;
+  position: relative;
 }
 
-.home .game-preview:first-child {
+.game-preview.selected {
+  border: 3px solid #17aaf3;
+}
+
+.game-preview:first-child {
   margin-top: 5rem;
 }
 
-.home .game-preview:hover {
+.game-preview:hover {
   background: #ccc;
 }
 
-.home .game-preview button {
+.game-preview button {
   background-color: unset;
 }
 
-.home .game-preview > div {
+.game-preview > div {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -159,43 +185,43 @@ button {
   gap: 3rem;
 }
 
-.home .game-preview .game-details h2 {
+.game-preview .game-details h2 {
   font-size: 3rem;
   margin: -1rem 0 0.5rem 0;
 }
 
-.home .game-preview .game-details div {
+.game-preview .game-details div {
   display: flex;
   flex-direction: row;
   gap: 2rem;
 }
 
-.home .game-preview .game-details p {
+.game-preview .game-details p {
   font-size: 1.7rem;
 }
-.home .game-preview .game-details p:nth-child(1) {
+.game-preview .game-details p:nth-child(1) {
   color: #5a5a5a;
   font-weight: 700;
 }
-.home .game-preview .game-details p:nth-child(2) {
+.game-preview .game-details p:nth-child(2) {
   color: #000;
   font-weight: 450;
 }
 
-.home .game-preview span {
+.game-preview span {
   padding: 10px;
   cursor: auto;
   border-radius: 30px;
   /* background-color: aqua; */
 }
 
-.home .game-preview span > button {
+.game-preview span > button {
   background-color: rgba(255, 0, 0, 0.2);
   padding: 1rem;
   margin: 1rem;
   border-radius: 20px;
 }
-.home .game-preview span > button:hover {
+.game-preview span > button:hover {
   background-color: rgba(255, 0, 0, 0.3);
 }
 
@@ -547,6 +573,7 @@ button {
   height: 40rem;
   overflow: scroll;
   border-radius: 1rem;
+  width: max-content;
 }
 
 .pts-table table {
@@ -590,7 +617,7 @@ tr:last-of-type {
   position: fixed;
   left: 0;
   top: 0;
-  /* background-color: white; */
+  background-color: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(5px);
   padding: 10vh;
 }
@@ -600,6 +627,101 @@ tr:last-of-type {
 }
 .aqua-bg {
   background-color: aqua;
+}
+/* . */
+
+.points-tally-page {
+  background: var(--light-grey-linear);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: baseline;
+  align-items: center;
+  padding: 5rem;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
+.points-tally-page .top-bar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 30%;
+}
+.points-tally-page .top-bar button {
+  /* width: 10rem;
+  height: 5rem; */
+  border-radius: 1rem;
+  font-size: 3rem;
+  background: var(--blue-linear);
+  color: white;
+  font-weight: 700;
+  padding: 1.5rem 3rem;
+  transition: border-radius 0.1s ease-in-out;
+}
+.points-tally-page .top-bar button:hover {
+  border-radius: 2rem;
+}
+.points-tally-page h1 {
+  font-size: 3rem;
+}
+
+.tally-games {
+  width: 50%;
+  max-width: 70rem;
+  margin-top: 2rem;
+  height: 78rem;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: baseline;
+  align-items: center;
+}
+
+.tally-games h1 {
+  font-size: 2rem;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.tally-close {
+  padding: 2rem 4rem;
+  margin: 5rem 10rem;
+  font-size: 3rem;
+  background-color: red;
+  position: fixed;
+  right: 0;
+  top: 0;
+  border-radius: 1rem;
+  color: white;
+  font-weight: 600;
+  transition: border-radius 0.05s ease-in-out;
+}
+
+.tally-close:hover {
+  border-radius: 2rem;
+}
+.modal-blur.tally {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.big-table {
+  height: 80vh;
+  overflow-x: hidden;
+  width: max-content;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.big-table > table {
+  min-width: 40rem;
 }
 
 @media only screen and (max-width: 900px) {
@@ -677,10 +799,11 @@ tr:last-of-type {
     width: 90%;
     display: flex;
     flex-direction: row;
+    flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
     gap: 2rem;
-    margin-top: 2vh;
+    margin-top: 5vh;
     margin-bottom: 8vh;
   }
 
@@ -700,7 +823,11 @@ tr:last-of-type {
   }
 
   .home .topbar button {
-    padding: 2rem 3rem;
+    padding: 1.4rem 1.7rem;
+  }
+
+  .home .topbar svg {
+    vertical-align: middle;
   }
 
   .home .games-list {
@@ -1053,10 +1180,10 @@ tr:last-of-type {
   }
 
   .game-page .prediction-section > .predictions {
-    overflow: scroll;
-    overflow-x: scroll;
-    height: 45vh;
     width: max-content;
+    overflow: scroll;
+    overflow-x: scroll thin;
+    height: 45vh;
     /* background-color: aqua; */
   }
 
@@ -1165,6 +1292,8 @@ tr:last-of-type {
     font-size: 2rem;
     /* height: 40rem; */
     height: max-content;
+    width: max-content;
+    max-width: 40rem;
     max-height: 40rem;
     overflow-y: scroll;
     overflow-x: scroll;
@@ -1222,5 +1351,93 @@ tr:last-of-type {
   }
   .aqua-bg {
     background-color: aqua;
+  }
+
+  .points-tally-page {
+    background: var(--light-grey-linear);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: baseline;
+    align-items: center;
+    padding: 1rem;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .points-tally-page .top-bar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    margin-top: 10rem;
+  }
+  .points-tally-page .top-bar button {
+    /* width: 10rem;
+    height: 5rem; */
+    border-radius: 1rem;
+    font-size: 3rem;
+    background: var(--blue-linear);
+    color: white;
+    font-weight: 700;
+    padding: 1.5rem 3rem;
+    transition: border-radius 0.1s ease-in-out;
+  }
+  .points-tally-page .top-bar button:hover {
+    border-radius: 2rem;
+  }
+  .points-tally-page h1 {
+    font-size: 3rem;
+  }
+
+  .tally-games {
+    width: 90%;
+    max-width: 70rem;
+    margin-top: 2rem;
+    height: 78rem;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: baseline;
+    align-items: baseline;
+  }
+
+  .tally-games .game-preview button {
+    display: none;
+  }
+
+  .tally-games h1 {
+    font-size: 2rem;
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  .tally-close {
+    padding: 1rem 2rem;
+    margin: 2rem 2.5rem;
+    font-size: 3rem;
+    background-color: red;
+    position: fixed;
+    right: 0;
+    top: 0;
+    border-radius: 1rem;
+    color: white;
+    font-weight: 600;
+    transition: border-radius 0.05s ease-in-out;
+  }
+
+  .tally-close:hover {
+    border-radius: 2rem;
+  }
+
+  .big-table {
+    height: 80vh;
+    background-color: rgba(255, 255, 255, 0.6);
+    overflow-x: hidden;
+    width: 90vw;
   }
 }

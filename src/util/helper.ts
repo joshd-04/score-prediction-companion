@@ -42,7 +42,11 @@ export function calculatePoints(game: IGame, prediction: IPrediction) {
     return 0;
 
   if (game.outcome === prediction.outcome) score += 2 * multiplier;
-  if (game.finalScore === prediction.finalScore) score += 3 * multiplier;
+  if (
+    game.finalScore === prediction.finalScore ||
+    game.finalScore === prediction.finalScore.split('-').reverse().join('-')
+  )
+    score += 3 * multiplier;
   if (
     (game.firstGoalScorer === null && prediction.firstGoalScorer === null) ||
     game.firstGoalScorer?.toLowerCase() ===

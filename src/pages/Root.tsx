@@ -66,7 +66,7 @@ export default function Root() {
     }
   }
   if (location.pathname.startsWith('/edit-game')) caption = 'Editing game';
-
+  if (location.pathname === '/tally-points') caption = 'Tally points';
   return (
     <>
       <div className="home-icon">
