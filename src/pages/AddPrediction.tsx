@@ -2,15 +2,12 @@ import { useState } from 'react';
 import { useNavigate, useOutletContext, useParams } from 'react-router-dom';
 import NotFound from './NotFound';
 import { IContext } from './Root';
-import { usernameIsUnique, validateScoreline } from '../util/helper';
+import {
+  PredictionErrorInterface,
+  validatePredictionInput,
+  validateScoreline,
+} from '../util/helper';
 import { IPrediction } from '../util/data';
-
-export interface ErrorInterface {
-  usernameError?: string;
-  outcomeError?: string;
-  finalScoreError?: string;
-  firstGoalScorerError?: string;
-}
 
 export default function AddPrediction() {
   const [username, setUsername] = useState('');
@@ -18,7 +15,7 @@ export default function AddPrediction() {
   const [finalScore, setFinalScore] = useState('');
   const [firstGoalScorer, setFirstGoalScorer] = useState<string | null>(null);
 
-  const [errors, setErrors] = useState<ErrorInterface>({});
+  const [errors, setErrors] = useState<PredictionErrorInterface>({});
 
   const { gameId } = useParams();
   const { data, setData } = useOutletContext<IContext>();
@@ -35,26 +32,16 @@ export default function AddPrediction() {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const errorObj: ErrorInterface = {};
+    // const errorObj: ErrorInterface = {};
     if (game === undefined) return;
 
-    console.log(usernameIsUnique(username, game.predictions));
-
     // validate
-    if (username.length === 0)
-      errorObj.usernameError = 'This field is required';
-    if (!usernameIsUnique(username, game.predictions))
-      errorObj.usernameError = 'This user already has a prediction';
-    if (outcome === '') errorObj.outcomeError = 'This field is required';
-    if (finalScore === '') errorObj.finalScoreError = 'This field is required';
-    if (
-      validateScoreline(finalScore) &&
-      !firstGoalScorer &&
-      finalScore !== '0-0'
-    )
-      errorObj.firstGoalScorerError = 'This field is required';
-    if (outcome === 'draw' && !validateScoreline(finalScore, true))
-      errorObj.finalScoreError = 'This score does not resemble a draw';
+    const errorObj: PredictionErrorInterface = validatePredictionInput(game, {
+      username,
+      outcome,
+      finalScore,
+      firstGoalScorer,
+    });
 
     setErrors(errorObj);
     if (Object.keys(errorObj).length > 0) return;

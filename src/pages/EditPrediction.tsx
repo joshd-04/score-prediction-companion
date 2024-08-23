@@ -2,9 +2,13 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useOutletContext, useParams } from 'react-router-dom';
 import NotFound from './NotFound';
 import { IContext } from './Root';
-import { usernameIsUnique, validateScoreline } from '../util/helper';
+import {
+  PredictionErrorInterface,
+  usernameIsUnique,
+  validatePredictionInput,
+  validateScoreline,
+} from '../util/helper';
 import { IPrediction } from '../util/data';
-import { ErrorInterface } from './AddPrediction';
 
 export default function EditPrediction() {
   const [username, setUsername] = useState('');
@@ -12,7 +16,7 @@ export default function EditPrediction() {
   const [finalScore, setFinalScore] = useState('');
   const [firstGoalScorer, setFirstGoalScorer] = useState<string | null>(null);
 
-  const [errors, setErrors] = useState<ErrorInterface>({});
+  const [errors, setErrors] = useState<PredictionErrorInterface>({});
 
   const { gameId, username: user } = useParams();
   const { data, setData } = useOutletContext<IContext>();
@@ -46,30 +50,27 @@ export default function EditPrediction() {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const errorObj: ErrorInterface = {};
     if (game === undefined) return;
     if (originalPrediction === undefined) return;
 
-    console.log(usernameIsUnique(username, game.predictions));
-
     // validate
-    if (username.length === 0)
-      errorObj.usernameError = 'This field is required';
+    const errorObj: PredictionErrorInterface = validatePredictionInput(
+      game,
+      {
+        username,
+        outcome,
+        finalScore,
+        firstGoalScorer,
+      },
+      true
+    );
+
+    // If username is changed, make sure its still unique
     if (
-      username !== originalPrediction.username &&
+      originalPrediction.username !== username &&
       !usernameIsUnique(username, game.predictions)
     )
-      errorObj.usernameError = 'This user already has a prediction';
-    if (outcome === '') errorObj.outcomeError = 'This field is required';
-    if (finalScore === '') errorObj.finalScoreError = 'This field is required';
-    if (
-      validateScoreline(finalScore) &&
-      !firstGoalScorer &&
-      finalScore !== '0-0'
-    )
-      errorObj.firstGoalScorerError = 'This field is required';
-    if (outcome === 'draw' && !validateScoreline(finalScore, true))
-      errorObj.finalScoreError = 'This score does not resemble a draw';
+      errorObj.usernameError = 'This username is taken';
 
     setErrors(errorObj);
     if (Object.keys(errorObj).length > 0) return;

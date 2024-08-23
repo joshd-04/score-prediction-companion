@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
-import { formatShortDate, validateScoreline } from '../util/helper';
+import {
+  formatShortDate,
+  GameErrorInterface,
+  validateGameInput,
+  validateScoreline,
+} from '../util/helper';
 import { useNavigate, useOutletContext, useParams } from 'react-router-dom';
 import { IContext } from './Root';
 import { IGame } from '../util/data';
 import NotFound from './NotFound';
-import { errorInterface } from './AddGame';
 
 export default function EditGame() {
   const { data, setData } = useOutletContext<IContext>();
@@ -20,7 +24,7 @@ export default function EditGame() {
   const [finalScore, setFinalScore] = useState('');
   const [firstGoalScorer, setFirstGoalScorer] = useState<string | null>('');
 
-  const [errors, setErrors] = useState<errorInterface>({});
+  const [errors, setErrors] = useState<GameErrorInterface>({});
 
   const navigator = useNavigate();
 
@@ -55,40 +59,14 @@ export default function EditGame() {
     if (game === undefined || gameId === undefined) return <NotFound />;
 
     // Validate all state variables
-    const errorObj: errorInterface = {};
-
-    if (team1.length === 0) {
-      errorObj.team1Error = 'This field is required';
-    }
-
-    if (team2.length === 0) errorObj.team2Error = 'This field is required';
-
-    if (date.length === 0) errorObj.dateError = 'This field is required';
-
-    if (outcome === '') errorObj.outcomeError = 'This field is required';
-
-    if (finalScore.length === 0 && outcome !== 'later')
-      errorObj.finalScoreError = 'This field is required';
-
-    if (
-      finalScore.length > 0 &&
-      !validateScoreline(finalScore) &&
-      outcome !== 'later'
-    )
-      errorObj.finalScoreError = `Invalid format, enter a score e.g 2-0, 2-2, 0-2.
-      Use a hyphen to separate scores`;
-
-    if (
-      finalScore !== '0-0' &&
-      validateScoreline(finalScore) &&
-      firstGoalScorer?.length === 0 &&
-      outcome !== 'later'
-    )
-      errorObj.firstGoalScorerError = 'This field is required';
-
-    if (outcome === 'draw' && !validateScoreline(finalScore, true)) {
-      errorObj.finalScoreError = 'This score does not resemble a draw';
-    }
+    const errorObj: GameErrorInterface = validateGameInput({
+      team1,
+      team2,
+      date,
+      outcome,
+      finalScore,
+      firstGoalScorer,
+    });
 
     setErrors(errorObj);
     if (Object.keys(errorObj).length > 0) return;
@@ -103,8 +81,6 @@ export default function EditGame() {
       }
     }
     // Change data state
-    console.log(date);
-
     // this line prevents ts error, this line will never  get executed because we dealt with this earlier
     if (outcome === '') return;
 

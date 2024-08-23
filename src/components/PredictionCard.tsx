@@ -39,7 +39,6 @@ export default function PredictionCard({
   }
 
   function handleEdit() {
-    console.log(pathname);
     navigator(
       `${pathname}/edit-prediction/${prediction.username.toLowerCase()}`
     );
