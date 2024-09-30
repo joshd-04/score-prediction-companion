@@ -65,9 +65,12 @@ function GamesList() {
     setData(newData);
   }
 
-  return data.map((game, i) => {
-    return <Game key={i} game={game} handleDeleteGame={handleDeleteGame} />;
-  });
+  return data
+    .slice()
+    .reverse()
+    .map((game, i) => {
+      return <Game key={i} game={game} handleDeleteGame={handleDeleteGame} />;
+    });
   // return <Game />;
 }
 
